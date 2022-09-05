@@ -47,6 +47,7 @@ services:
       MYSQL_DATABASE: trybecardb
     ports:
       - "33061:3306"
+    platform: linux/x86_64   
     
 
 # Lista de redes que os containeres irão utilizar
