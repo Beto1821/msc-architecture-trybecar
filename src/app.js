@@ -1,5 +1,7 @@
 const express = require('express');
-const connection = require('./connection');
+const connection = require('./models/connection');
+
+const travelModel = require('./models/travel.model');
 
 const app = express();
 
@@ -35,20 +37,18 @@ app.post('/passengers/:passengerId/request/travel', async (req, res) => {
 
 
   if (isPassengerExists(passengerId)) {
-    const [resultTravel] = await connection.execute(
-      `INSERT INTO travels 
-          (passenger_id, starting_address, ending_address) VALUE (?, ?, ?)`,
-      [
-        passengerId,
-        startingAddress,
-        endingAddress,
-      ],
-    );
-    await Promise.all(saveWaypoints(waypoints, resultTravel.insertId));
+    // Aqui substituímos o trecho de código SQL pela chamada a função insert do model
+    // e armazenamos o retorno da função na variável travelId 
+    const travelId = await travelModel.insert({ passengerId, startingAddress, endingAddress });
+
+    // Renomeamos o parâmetro result.insertId para travelId
+    await Promise.all(saveWaypoints(waypoints, travelId));
 
     const [[response]] = await connection.execute(
       'SELECT * FROM travels WHERE id = ?',
-      [resultTravel.insertId],
+
+      // Renomeamos o parâmetro result.insertId para travelId
+      [travelId],
     );
     res.status(201).json(response);
     return;
