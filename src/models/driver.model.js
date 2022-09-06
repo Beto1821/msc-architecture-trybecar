@@ -17,7 +17,17 @@ const findById = async (driverId) => {
   return result;
 };
 
+const insert = async (driver) => {
+  const [{ insertId }] = await connection.execute(
+  'INSERT INTO drivers (name) VALUE (?)',
+  [driver.name],
+  );
+
+  return insertId;
+};
+
 module.exports = {
   findAll,
   findById,
+  insert,
 };

@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
 
-const { findAll, findById } = require('../../../src/models/driver.model');
+const { findAll, findById, insert } = require('../../../src/models/driver.model');
 const connection = require('../../../src/models/connection');
 
 describe('Exercicio 1', function () {
@@ -76,6 +76,32 @@ describe('Exercicio 4', function () {
       const response = await findById(payload);
 
       expect(response).to.deep.equal(expected);
+    });
+  });
+});
+
+describe('Exercicio 5', function () {
+  describe('Cadastra uma pessoa motorista', function () {
+    before(async function () {
+      const execute = { insertId: 1 };
+
+      sinon.stub(connection, 'execute').resolves([execute]);
+    });
+  
+    after(async function () {
+      connection.execute.restore();
+    });
+
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      const payload = {
+        name: 'Liana Cisneiros',
+      };
+
+      const response = await insert(payload);
+
+      expect(response).to.equal(expected);
     });
   });
 });
