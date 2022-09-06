@@ -44,16 +44,19 @@ app.post('/passengers/:passengerId/request/travel', async (req, res) => {
     // Renomeamos o parâmetro result.insertId para travelId
     await Promise.all(saveWaypoints(waypoints, travelId));
 
-    const [[response]] = await connection.execute(
-      'SELECT * FROM travels WHERE id = ?',
+  //   const [[response]] = await connection.execute(
+  //     'SELECT * FROM travels WHERE id = ?',
 
-      // Renomeamos o parâmetro result.insertId para travelId
-      [travelId],
-    );
-    res.status(201).json(response);
-    return;
+  //     // Renomeamos o parâmetro result.insertId para travelId
+  //     [travelId],
+  //   );
+  //   res.status(201).json(response);
+  //   return;
+  // }
+
+    const travel = await travelModel.findById(travelId);
+    return res.status(201).json(travel);
   }
-
   res.status(500).json({ message: 'Ocorreu um erro' });
 });
 
