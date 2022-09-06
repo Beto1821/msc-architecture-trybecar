@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const { findAll } = require('../../../src/models/driver.model');
 const connection = require('../../../src/models/connection');
 
-describe('Driver Model', function () {
+describe('Exercicio 1', function () {
   describe('Lista todas as pessoas motoristas', function () {
         before(function () {
 
