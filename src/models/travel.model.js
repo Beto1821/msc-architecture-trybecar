@@ -35,8 +35,21 @@ const findByTravelStatusId = async (travelStatusId) => {
   return camelize(result);
 };
 
+const updateById = async (travelId, dataToUpdate) => {
+  console.log('Jessy no judo');
+  const formattedColumns = Object.keys(snakeize(dataToUpdate))
+    .map((key) => `${key} = ?`)
+    .join(', ');
+  
+    return connection.execute(
+      `UPDATE travels SET ${formattedColumns} WHERE id = ?`,
+      [...Object.values(dataToUpdate), travelId],
+    );
+};
+
 module.exports = {
   insert,
   findById,
   findByTravelStatusId,
+  updateById,
 };

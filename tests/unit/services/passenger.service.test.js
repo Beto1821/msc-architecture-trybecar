@@ -3,15 +3,18 @@ const sinon = require('sinon');
 const { requestTravel } = require('../../../src/services/passenger.service');
 const travelModel = require('../../../src/models/travel.model');
 const waypointModel = require('../../../src/models/waypoint.model');
+const passengerModel = require('../../../src/models/passenger.model');
 
 const { travelResponse } = require('./mocks/passenger.service.mock');
 
 describe('Verificando service pessoa passageira', function () {
   describe('solicitação de viagem', function () {
-    it('sem pontos de parada é realizada com sucesso', async function () {
+    it('Teste 1 - sem pontos de parada é realizada com sucesso', async function () {
       // arrange
-       sinon.stub(travelModel, 'insert').resolves(1); // retorna travel com ID 1
+       sinon.stub(passengerModel, 'findById').resolves(1); 
+       sinon.stub(travelModel, 'insert').resolves(1); 
        sinon.stub(travelModel, 'findById').resolves(travelResponse);
+
       const WAITING_DRIVER = 1;
       const passenger = {
         id: 1,
@@ -25,7 +28,6 @@ describe('Verificando service pessoa passageira', function () {
         passenger.endingAddress,
       );
       // assert
-      console.log(travel);
       expect(travel.message).to.deep.equal({
         id: 1,
         passengerId: 1,
@@ -37,11 +39,12 @@ describe('Verificando service pessoa passageira', function () {
       });
     });
 
-    it('com pontos de parada é realizada com sucesso', async function () {
+    it('Teste 2 - com pontos de parada é realizada com sucesso', async function () {
       // arrange
        sinon.stub(travelModel, 'insert').resolves(1); // retorna travel com ID 1
        sinon.stub(travelModel, 'findById').resolves(travelResponse);
        sinon.stub(waypointModel, 'insert').resolves(1); // retorna waypoint com ID 1
+       sinon.stub(passengerModel, 'findById').resolves(1); 
 
       const WAITING_DRIVER = 1;
       const passenger = {
@@ -70,7 +73,7 @@ describe('Verificando service pessoa passageira', function () {
       });
     });
 
-    it('com mesmo local de origem e destino é rejeitada', async function () {
+    it('Teste 3 - com mesmo local de origem e destino é rejeitada', async function () {
       // arrange
       const passenger = {
         id: 1,
