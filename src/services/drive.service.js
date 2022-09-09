@@ -1,8 +1,8 @@
-const travelModel = require('../models/travel.model');
+const { travelModel } = require('../models');
 const {
   validateInputValues,
   validateAlreadyDriver,
-} = require('./validation/validationsInputValues');
+} = require('./validations/validationsInputValues');
 
 const WAITING_DRIVER = 1;
 const DRIVER_ON_THE_WAY = 2;

@@ -36,7 +36,6 @@ const findByTravelStatusId = async (travelStatusId) => {
 };
 
 const updateById = async (travelId, dataToUpdate) => {
-  console.log('Jessy no judo');
   const formattedColumns = Object.keys(snakeize(dataToUpdate))
     .map((key) => `${key} = ?`)
     .join(', ');

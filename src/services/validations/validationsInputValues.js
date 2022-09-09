@@ -1,6 +1,5 @@
 const { addRequestTravelSchema } = require('./schemas');
-const travelModel = require('../../models/travel.model');
-const driverModel = require('../../models/driver.model');
+const { travelModel, driverModel } = require('../../models');
 
 const validateRequestTravelSchema = (passengerId, startingAddress, endingAddress, waypoints) => {
   const { error } = addRequestTravelSchema

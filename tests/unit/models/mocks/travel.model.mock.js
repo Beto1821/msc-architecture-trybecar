@@ -1,7 +1,6 @@
-
 const travelsFromDB = [
   {
-    
+
     id: 1,
     driver_id: 3,
     passenger_id: 4,
@@ -11,7 +10,7 @@ const travelsFromDB = [
     request_date: '20202',
   },
   {
-    
+
     id: 2,
     driver_id: 1,
     passenger_id: 2,
@@ -24,7 +23,7 @@ const travelsFromDB = [
 
 const travels = [
   {
-    
+
     id: 1,
     driverId: 3,
     passengerId: 4,
@@ -34,7 +33,7 @@ const travels = [
     requestDate: '20202',
   },
   {
-    
+
     id: 2,
     driverId: 1,
     passengerId: 2,
